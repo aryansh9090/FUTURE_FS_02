@@ -1,66 +1,88 @@
-# FUTURE_FS_02 - Full-Stack Mini CRM
+# FUTURE_FS_02 – Client Lead Management System (Mini CRM)
 
-A full-stack Mini CRM built with React, Node.js, Express, and MySQL. It features lead management, a Kanban board, analytics, AI insights (using Anthropic's Claude), and admin authentication.
+<img width="1919" height="916" alt="image" src="https://github.com/user-attachments/assets/03783835-734c-4deb-ad85-713a04321b83" />
+<img width="1919" height="924" alt="image" src="https://github.com/user-attachments/assets/63aaccd0-9585-49f1-8033-4234f4472f79" />
+<img width="1917" height="920" alt="image" src="https://github.com/user-attachments/assets/b7464c72-4033-451b-a909-ed527033d4ee" />
+<img width="1919" height="914" alt="image" src="https://github.com/user-attachments/assets/d4ba416c-e80a-4923-901d-70437e103f5a" />
+
+A full-stack Mini CRM application built with **React, Node.js, Express, and MySQL** to streamline client lead management. The system provides lead tracking, Kanban-based workflow management, analytics dashboards, AI-powered insights, and secure admin authentication.
+
+## Features
+* Lead Management (Create, Read, Update, Delete)
+* Lead Status Tracking (New, Contacted, Converted)
+* Drag-and-Drop Kanban Board
+* Analytics Dashboard with Visual Reports
+* AI-Powered Lead Insights using Claude AI
+* Secure Admin Authentication with JWT
+* Notes and Follow-Up Management
+* Responsive User Interface
 
 ## Tech Stack
-* **Frontend**: React (Vite), Tailwind CSS, Lucide React, Recharts, @hello-pangea/dnd (for drag-and-drop Kanban)
-* **Backend**: Node.js, Express, MySQL, bcryptjs, jsonwebtoken (JWT for authentication)
+### Frontend
+* React (Vite)
+* Tailwind CSS
+* Lucide React
+* Recharts
+* @hello-pangea/dnd
+
+### Backend
+* Node.js
+* Express.js
+* MySQL
+* bcryptjs
+* JSON Web Token (JWT)
 
 ## Project Structure
-* `/client` - React frontend
-* `/server` - Node.js & Express backend
+FUTURE_FS_02/
+├── client/     # React Frontend
+├── server/     # Node.js & Express Backend
+└── README.md
 
-## Getting Started
+## Installation & Setup
 
 ### Prerequisites
 * Node.js
-* MySQL Server (running locally)
+* MySQL Server
 
-### Database Setup
-1. Create a MySQL database named `crm_db` (or as configured in your `.env`).
-2. The server will automatically initialize the necessary tables when started.
+### Database Configuration
+Create a MySQL database:
+```sql
+CREATE DATABASE crm_db;
+```
 
 ### Backend Setup
-1. Navigate to the `server` directory:
-   ```bash
-   cd server
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Configure your environment variables in `server/.env`:
-   ```env
-   PORT=5000
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASSWORD=your_mysql_password
-   DB_NAME=crm_db
-   JWT_SECRET=supersecretjwtkey_replace_me_in_production
-   ```
-4. Start the server:
-   ```bash
-   node server.js
-   ```
+```bash
+cd server
+npm install
+```
+
+Create a `.env` file inside the server directory:
+```env
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=crm_db
+JWT_SECRET=your_secret_key
+```
+
+Run the backend server:
+```bash
+node server.js
+```
 
 ### Frontend Setup
-1. Open a new terminal and navigate to the `client` directory:
-   ```bash
-   cd client
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Configure your AI API key in `client/.env.local`:
-   ```env
-   VITE_ANTHROPIC_API_KEY=your_anthropic_api_key_here
-   ```
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
+```bash
+cd client
+npm install
+npm run dev
+```
 
-### Access the Application
-* The frontend app runs at `http://localhost:5173` (or the port shown by Vite).
-* The backend API runs on `http://localhost:5000`.
+## Application Access
+* Frontend: http://localhost:5173
+* Backend API: http://localhost:5000
+
+## Author
+Aryan Sharma
+SRM Institute of Science and Technology
+B.Tech CSE
