@@ -70,8 +70,21 @@ router.put('/:id', auth, async (req, res) => {
     let lead = await Lead.findById(req.params.id);
     if (!lead) return res.status(404).json({ message: 'Lead not found' });
 
+    const oldStatus = lead.status;
+
     lead = await Lead.update(req.params.id, req.body);
     lead.score = calculateScore(lead);
+
+    // Auto-log contact attempt if status changed to Contacted or Qualified
+    if (req.body.status && req.body.status !== oldStatus && (req.body.status === 'Contacted' || req.body.status === 'Qualified')) {
+      const { pool } = require('../config/db');
+      const hour_of_day = new Date().getHours();
+      await pool.query(
+        'INSERT INTO contact_attempts (lead_id, success, hour_of_day) VALUES (?, ?, ?)',
+        [req.params.id, true, hour_of_day]
+      );
+    }
+
     res.json(lead);
   } catch (err) {
     console.error(err.message);

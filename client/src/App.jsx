@@ -6,6 +6,9 @@ import Kanban from './pages/Kanban';
 import Analytics from './pages/Analytics';
 import AiInsights from './pages/AiInsights';
 import CrossInsights from './pages/CrossInsights';
+import GoldenHour from './pages/GoldenHour';
+import ConversionDNA from './pages/ConversionDNA';
+import About from './pages/About';
 import Layout from './components/Layout';
 
 // Protected Route wrapper
@@ -37,6 +40,9 @@ function App() {
           <Route path="analytics" element={<Analytics />} />
           <Route path="ai-insights" element={<AiInsights />} />
           <Route path="cross-insights" element={<CrossInsights />} />
+          <Route path="golden-hour" element={<GoldenHour />} />
+          <Route path="conversion-dna" element={<ConversionDNA />} />
+          <Route path="about" element={<About />} />
         </Route>
       </Routes>
     </Router>

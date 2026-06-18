@@ -3,7 +3,7 @@ import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import LeadModal from './LeadModal';
 import { 
   LayoutDashboard, Users, BarChart3, BrainCircuit,
-  Plus, LogOut, Search, Bell, Activity, Mail, Phone, Kanban as KanbanIcon
+  Plus, LogOut, Search, Bell, Activity, Mail, Phone, Kanban as KanbanIcon, Clock, Dna, Info
 } from 'lucide-react';
 import api from '../api';
 
@@ -11,6 +11,8 @@ const Layout = () => {
   const navigate = useNavigate();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [hasWarnings, setHasWarnings] = useState(false);
+  const [hasGoldenHours, setHasGoldenHours] = useState(false);
+  const [hasConversionDna, setHasConversionDna] = useState(false);
 
   React.useEffect(() => {
     api.get('/leads').then(res => {
@@ -24,6 +26,18 @@ const Layout = () => {
         return false;
       });
       setHasWarnings(needsWarning);
+    }).catch(console.error);
+
+    api.get('/goldenhour/best-times').then(res => {
+      if (res.data && res.data.topHours && res.data.topHours.length > 0) {
+        setHasGoldenHours(true);
+      }
+    }).catch(console.error);
+
+    api.get('/conversiondna/profile').then(res => {
+      if (res.data && res.data.hasData) {
+        setHasConversionDna(true);
+      }
     }).catch(console.error);
   }, []);
 
@@ -39,6 +53,8 @@ const Layout = () => {
     { icon: BarChart3, label: 'Analytics', path: '/analytics' },
     { icon: BrainCircuit, label: 'AI Insights', path: '/ai-insights' },
     { icon: Activity, label: 'Cross Insights', path: '/cross-insights' },
+    { icon: Clock, label: 'Golden Hour', path: '/golden-hour' },
+    { icon: Dna, label: 'Conversion DNA', path: '/conversion-dna' },
   ];
 
   return (
@@ -93,6 +109,12 @@ const Layout = () => {
                     {item.label === 'Cross Insights' && hasWarnings && (
                       <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse-dot shadow-[0_0_8px_rgba(239,68,68,0.8)] border border-dark-sidebar" />
                     )}
+                    {item.label === 'Golden Hour' && hasGoldenHours && (
+                      <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-accent rounded-full animate-pulse-dot shadow-[0_0_8px_rgba(132,204,22,0.8)] border border-dark-sidebar" />
+                    )}
+                    {item.label === 'Conversion DNA' && hasConversionDna && (
+                      <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-accent rounded-full animate-pulse-dot shadow-[0_0_8px_rgba(132,204,22,0.8)] border border-dark-sidebar" />
+                    )}
                   </div>
                   {item.label}
                 </NavLink>
@@ -103,6 +125,18 @@ const Layout = () => {
           <div>
             <h4 className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Settings</h4>
             <nav className="space-y-1">
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-accent/15 text-accent shadow-[inset_2px_0_0_0_#84CC16]'
+                      : 'text-gray-400 hover:text-white hover:bg-white/[0.04]'
+                  }`
+                }
+              >
+                <Info size={18} /> About
+              </NavLink>
               <button 
                 onClick={() => setIsAddModalOpen(true)}
                 className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/[0.04] transition-colors cursor-pointer"

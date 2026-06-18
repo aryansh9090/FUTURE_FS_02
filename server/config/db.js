@@ -50,6 +50,17 @@ async function initDB() {
       );
     `);
 
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS contact_attempts (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        lead_id INT NOT NULL,
+        contacted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        success BOOLEAN DEFAULT FALSE,
+        hour_of_day INT,
+        FOREIGN KEY (lead_id) REFERENCES leads(id) ON DELETE CASCADE
+      );
+    `);
+
     console.log('Tables initialized successfully.');
   } catch (error) {
     console.error('Error initializing database:', error.message);
