@@ -44,11 +44,7 @@ FUTURE_FS_02/
 * Node.js
 * MySQL Server
 
-### Database Configuration
-Create a MySQL database:
-```sql
-CREATE DATABASE crm_db;
-```
+
 
 ### Backend Setup
 ```bash
@@ -56,15 +52,7 @@ cd server
 npm install
 ```
 
-Create a `.env` file inside the server directory:
-```env
-PORT=5000
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=crm_db
-JWT_SECRET=your_secret_key
-```
+
 
 Run the backend server:
 ```bash
